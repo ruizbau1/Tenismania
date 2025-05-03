@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Tenismania</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <header class="dashboard-header">
+    <div class="logo">Tenismania</div>
+    <div class="admin-info">
+      <span class="material-icons">person</span>
+      <span>Admin</span>
+    </div>
+  </header>
+
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <ul id="sidebar-menu">
+        <li data-section="panel"><span class="material-icons">dashboard</span> Panel</li>
+        <li data-section="productos"><span class="material-icons">inventory_2</span> Productos</li>
+        <li data-section="pedidos"><span class="material-icons">shopping_cart</span> Pedidos</li>
+        <li onclick="window.location.href='index.html'"><span class="material-icons">logout</span> Cerrar sesión</li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <!-- Panel -->
+      <section id="section-panel" class="section visible">
+        <h1>Resumen general</h1>
+        <div class="stats-grid">
+          <div class="card"><h2>Productos</h2><p>24</p></div>
+          <div class="card"><h2>Pedidos</h2><p>152</p></div>
+          <div class="card"><h2>Ingresos</h2><p>$58,300 MXN</p></div>
+          <div class="card"><h2>Usuarios</h2><p>17</p></div>
+        </div>
+        <div class="charts">
+          <div class="chart-container">
+            <h3>Pedidos por mes</h3>
+            <canvas id="ordersChart"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>Ventas por categoría</h3>
+            <canvas id="salesChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Productos -->
+      <section id="section-productos" class="section">
+        <h2>Gestión de productos</h2>
+      
+        <form class="product-form" id="productForm">
+          <input type="text" id="nombreProducto" placeholder="Nombre del producto" required>
+          <input type="number" id="precioProducto" placeholder="Precio" required>
+          <input type="number" id="stockProducto" placeholder="Stock" required>
+          <button type="submit">Agregar producto</button>
+        </form>
+      
+        <table class="product-table" id="productTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Stock</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>001</td>
+              <td>Tenis Valencia</td>
+              <td>$1899</td>
+              <td>12</td>
+              <td>
+                <button class="edit-btn">Editar</button>
+                <button class="delete-btn">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      
+      <section id="section-pedidos" class="section">
+        <h2>Gestión de pedidos</h2>
+      
+        <table class="product-table">
+          <thead>
+            <tr>
+              <th>ID Pedido</th>
+              <th>Cliente</th>
+              <th>Total</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#1001</td>
+              <td>Carlos Ruiz</td>
+              <td>$2,500</td>
+              <td>
+                <span class="estado-pendiente">Pendiente</span>
+                <button class="confirm-btn">Confirmar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>#1002</td>
+              <td>María Gómez</td>
+              <td>$1,799</td>
+              <td><span class="estado-confirmado">Confirmado</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      
+    </main>
+  </div>
+
+  <script>
+    // Agregar productos dinámicamente
+    let productId = 2;
+    document.getElementById('productForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = document.getElementById('nombreProducto').value;
+      const precio = document.getElementById('precioProducto').value;
+      const stock = document.getElementById('stockProducto').value;
+  
+      const tabla = document.getElementById('productTable').querySelector('tbody');
+      const row = tabla.insertRow();
+  
+      row.innerHTML = `
+        <td>${String(productId).padStart(3, '0')}</td>
+        <td>${nombre}</td>
+        <td>$${precio}</td>
+        <td>${stock}</td>
+        <td>
+          <button class="edit-btn">Editar</button>
+          <button class="delete-btn">Eliminar</button>
+        </td>
+      `;
+  
+      productId++;
+      document.getElementById('productForm').reset();
+    });
+  
+    // Confirmar pedidos
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('confirm-btn')) {
+        const td = e.target.parentElement;
+        td.innerHTML = '<span class="estado-confirmado">Confirmado</span>';
+      }
+    });
+  
+    // Navegación de secciones
+    const menuItems = document.querySelectorAll('#sidebar-menu li[data-section]');
+    const sections = document.querySelectorAll('.section');
+    const statsGrid = document.querySelector('.stats-grid');
+    const charts = document.querySelector('.charts');
+  
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const target = item.getAttribute('data-section');
+        sections.forEach(sec => sec.classList.remove('visible'));
+  
+        const activeSection = document.getElementById('section-' + target);
+        if (activeSection) activeSection.classList.add('visible');
+  
+        statsGrid.style.display = (target === 'panel') ? 'grid' : 'none';
+        charts.style.display = (target === 'panel') ? 'grid' : 'none';
+      });
+    });
+  
+    // Gráficas
+    window.addEventListener('DOMContentLoaded', () => {
+      const ctx1 = document.getElementById('ordersChart').getContext('2d');
+      new Chart(ctx1, {
+        type: 'line',
+        data: {
+          labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+          datasets: [{
+            label: 'Pedidos',
+            data: [20, 35, 40, 50, 30, 60],
+            borderColor: '#d6480f',
+            backgroundColor: 'rgba(214, 72, 15, 0.2)',
+            fill: true,
+            tension: 0.4
+          }]
+        },
+        options: { responsive: true, plugins: { legend: { display: false } } }
+      });
+  
+      const ctx2 = document.getElementById('salesChart').getContext('2d');
+      new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+          labels: ['Mujer', 'Hombre', 'Niños'],
+          datasets: [{
+            data: [45, 40, 15],
+            backgroundColor: ['#ff6384', '#36a2eb', '#ffce56']
+          }]
+        },
+        options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+      });
+    });
+  </script>
+  
+</body>
+</html>

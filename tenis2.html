@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tenismania - Detalle de producto</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="responsivo.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .producto-container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .producto-container img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .volver {
+      font-size: 14px;
+      text-decoration: none;
+      color: #333;
+      display: inline-block;
+      margin-bottom: 10px;
+      transition: color 0.3s;
+    }
+
+    .volver:hover {
+      color: #d6480f;
+    }
+
+    .producto-info h1 {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+
+    .precio {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .opciones span {
+      margin-right: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      padding-bottom: 4px;
+    }
+
+    .opciones span.activa {
+      color: #d6480f;
+      border-bottom: 2px solid #d6480f;
+    }
+
+    .tallas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 15px 0 25px;
+    }
+
+    .talla {
+      padding: 10px 14px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .talla.activa {
+      background-color: black;
+      color: white;
+      border-color: black;
+    }
+
+    .boton-compra {
+      display: block;
+      width: 100%;
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 14px 0;
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+    /* Header estilo HOFF mejorado */
+header {
+  background-color: white;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.main-nav {
+  display: flex;
+  gap: 24px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: black;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.main-nav a.active {
+  color: #d6480f;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.lang {
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f1f1f1;
+  padding: 6px 10px;
+  border-radius: 20px;
+}
+
+.search-container input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  width: 140px;
+}
+
+.user-dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  min-width: 150px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 1001;
+}
+
+.dropdown-content p {
+  margin: 0;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 5px 0;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown-content a:hover {
+  background-color: #f3f3f3;
+  border-radius: 4px;
+}
+
+.user-dropdown:hover .dropdown-content {
+  display: block;
+}
+.cart-icon {
+  position: relative;
+  text-decoration: none;
+  color: inherit; /* Hereda el color del entorno, usualmente negro */
+}
+
+.cart-icon:hover {
+  color: inherit; /* Asegura que no cambie a azul al pasar el mouse */
+}
+#cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #d6480f;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+.btn-regresar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #f3f3f3;
+  color: #333;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  transition: background 0.3s, color 0.3s;
+  margin-bottom: 20px;
+}
+
+.btn-regresar:hover {
+  background-color: #414141;
+  color: white;
+}
+
+  </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+          <div class="logo">Tenismania</div>
+          
+          <nav class="main-nav">
+            <a class="active" href="#">REBAJAS</a>
+            <a href="#">MUJER</a>
+            <a href="#">HOMBRE</a>
+          </nav>
+          
+          <div class="icons">
+            <select id="language-select">
+              <option value="es">ES</option>
+              <option value="en">EN</option>
+            </select>
+      
+            <div class="search-container">
+              <span class="material-icons icon">search</span>
+              <input type="text" id="search-input" placeholder="Buscar tenis...">
+            </div>
+      
+            <div class="user-dropdown">
+              <span class="material-icons icon user-icon">person</span>
+              <div class="dropdown-content">
+                <p>Admin</p>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="#">Cerrar sesión</a>
+              </div>
+            </div>
+            <a href="cart.html" class="cart-icon">
+              <span class="material-icons icon">shopping_bag</span>
+              <span id="cart-count">0</span>
+            </a>
+              
+          </div>
+        </div>
+      </header>
+      
+
+  <main class="producto-container">
+    <a href="index.html" class="btn-regresar" title="Regresar">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <img src="https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/b27091ee-f4a6-4ab5-80d0-f67aa4345e54/NIKE+DUNK+LOW+%28GS%29.png" alt="Tenis Matera" />
+    <div class="producto-info">
+      <h1>Nike Dunk Low</h1>
+      <p class="precio">$1,799 MXN</p>
+      <div class="opciones">
+        <span class="opcion activa">Unisex</span>
+      </div>
+      <div class="tallas">
+        <div class="talla activa">35</div>
+        <div class="talla">36</div>
+        <div class="talla">37</div>
+        <div class="talla">38</div>
+        <div class="talla">39</div>
+        <div class="talla">40</div>
+        <div class="talla">41</div>
+        <div class="talla">42</div>
+      </div>
+      <button class="boton-compra">Añadir a la cesta</button>
+    </div>
+  </main>
+
+  <script>
+    // Tallas
+    document.querySelectorAll('.talla').forEach(talla => {
+      talla.addEventListener('click', () => {
+        document.querySelectorAll('.talla').forEach(t => t.classList.remove('activa'));
+        talla.classList.add('activa');
+      });
+    });
+
+    // Opciones Mujer / Niños
+    document.querySelectorAll('.opcion').forEach(opcion => {
+      opcion.addEventListener('click', () => {
+        document.querySelectorAll('.opcion').forEach(o => o.classList.remove('activa'));
+        opcion.classList.add('activa');
+      });
+    });
+  </script>
+  <script>
+    const btnCompra = document.querySelector('.boton-compra');
+    const contador = document.getElementById('cart-count');
+  
+    btnCompra.addEventListener('click', () => {
+      let cantidad = parseInt(contador.textContent);
+      cantidad++;
+      contador.textContent = cantidad;
+    });
+  </script>
+  
+
+<script src="translate.js"></script>
+</body>
+</html>

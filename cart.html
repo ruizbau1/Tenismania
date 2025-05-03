@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrito - Tenismania</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    .cart-container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .cart-container h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #ddd;
+      padding: 16px 0;
+    }
+
+    .cart-item img {
+      width: 100px;
+      border-radius: 8px;
+    }
+
+    .cart-details {
+      flex: 1;
+      margin-left: 20px;
+    }
+
+    .cart-details h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .cart-details p {
+      margin: 4px 0;
+    }
+
+    .cart-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cart-actions button {
+      padding: 6px 10px;
+      border: none;
+      background: #d6480f;
+      color: white;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .cart-summary {
+      text-align: right;
+      margin-top: 30px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .btn-regresar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #f3f3f3;
+  color: #333;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  transition: background 0.3s, color 0.3s;
+  margin-bottom: 20px;
+}
+
+.btn-regresar:hover {
+  background-color: #414141;
+  color: white;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo">Tenismania</div>
+      <nav class="main-nav">
+        <a href="#">REBAJAS</a>
+        <a href="#">MUJER</a>
+        <a href="#">HOMBRE</a>
+      </nav>
+      <div class="icons">
+        <select id="language-select">
+          <option value="es">ES</option>
+          <option value="en">EN</option>
+        </select>
+        <div class="search-container">
+          <span class="material-icons icon">search</span>
+          <input type="text" placeholder="Buscar tenis...">
+        </div>
+        <div class="user-dropdown">
+          <span class="material-icons icon user-icon">person</span>
+          <div class="dropdown-content">
+            <p>Admin</p>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="#">Cerrar sesión</a>
+          </div>
+        </div>
+        <a href="cart.html" class="cart-icon">
+          <span class="material-icons icon">shopping_bag</span>
+          <span id="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido del carrito -->
+  <main class="cart-container">
+    <a href="index.html" class="btn-regresar" title="Regresar">
+        <span class="material-icons">arrow_back</span>
+      </a>
+    <h2>Tu carrito</h2>
+      
+  
+    <div class="cart-item">
+      <img src="https://via.placeholder.com/100x100?text=Tenis" alt="Producto">
+      <div class="cart-details">
+        <h3>VALENCIA</h3>
+        <p>Precio: $1,899 MXN</p>
+        <p>Talla: 40</p>
+      </div>
+      <div class="cart-actions">
+        <button class="delete-btn">Eliminar</button>
+      </div>
+    </div>
+  
+    <div class="cart-item">
+      <img src="https://via.placeholder.com/100x100?text=Tenis" alt="Producto">
+      <div class="cart-details">
+        <h3>OSAKA</h3>
+        <p>Precio: $1,799 MXN</p>
+        <p>Talla: 38</p>
+      </div>
+      <div class="cart-actions">
+        <button class="delete-btn">Eliminar</button>
+      </div>
+    </div>
+  
+    <div class="cart-summary" id="cart-total">
+      Total: $3,698 MXN
+    </div>
+  </main>
+  
+
+  <script>
+    const cartCount = document.getElementById('cart-count');
+    let count = parseInt(localStorage.getItem('carrito') || '0');
+    cartCount.textContent = count;
+  
+    const deleteButtons = document.querySelectorAll('.delete-btn');
+    const cartSummary = document.getElementById('cart-total');
+  
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.cart-item');
+        item.remove();
+  
+        // Restar 1 al contador del carrito
+        if (count > 0) {
+          count--;
+          localStorage.setItem('carrito', count);
+          cartCount.textContent = count;
+        }
+  
+        // Actualizar el total (opcional, aquí simplemente lo oculta)
+        const remainingItems = document.querySelectorAll('.cart-item');
+        if (remainingItems.length === 0) {
+          cartSummary.textContent = "Tu carrito está vacío";
+        }
+      });
+    });
+  </script>
+  
+
+</body>
+</html>

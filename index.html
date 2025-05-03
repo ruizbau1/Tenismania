@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tenismania - Rebajas</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="logo">Tenismania</div>
+      <nav class="main-nav">
+        <a class="active" href="#" data-i18n="sale">REBAJAS</a>
+        <a href="#" data-i18n="women">MUJER</a>
+        <a href="#" data-i18n="men">HOMBRE</a>
+      </nav>
+      <div class="icons">
+        <select id="language-select">
+          <option value="es">ES</option>
+          <option value="en">EN</option>
+        </select>
+        <div class="search-container">
+          <span class="material-icons icon">search</span>
+          <input type="text" id="search-input" placeholder="Buscar tenis...">
+        </div>        
+        <div class="user-dropdown">
+          <span class="material-icons icon user-icon">person</span>
+          <div class="dropdown-content">
+            <p>Admin</p>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="#">Cerrar sesión</a>
+          </div>
+        </div>             
+        <a href="cart.html" class="cart-icon">
+          <span class="material-icons icon">shopping_bag</span>
+          <span id="cart-count">0</span>
+        </a>
+        
+        
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <h2 class="section-title" data-i18n="sale">REBAJAS</h2>
+    <section class="product-grid">
+      <div class="product-card">
+        <img src="https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/f2a9595e-d7b2-4b43-a146-f4b8a9d0bc70/NIKE+DUNK+LOW+%28GS%29.png" alt="Modelo 1" />
+        <h3>Nike Dunk Low Rosas</h3>
+        <p>$1,899 MXN</p>
+        <a href="tenis1.html" class="ver-mas-btn">Ver más</a>
+      </div>
+      <div class="product-card">
+        <img src="https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/b27091ee-f4a6-4ab5-80d0-f67aa4345e54/NIKE+DUNK+LOW+%28GS%29.png" alt="Modelo 2" />
+        <h3>Nike Dunk Low Rojos</h3>
+        <p>$1,799 MXN</p>
+        <a href="tenis2.html" class="ver-mas-btn">Ver más</a>
+      </div>
+      <div class="product-card">
+        <img src="https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/43f8bde0-f642-4c51-a8a1-2a199edd1a4e/NIKE+DUNK+LOW+QS.png" alt="Modelo 3" />
+        <h3>Nike Dunk</h3>
+        <p>$1,599 MXN</p>
+        <a href="tenis3.html" class="ver-mas-btn">Ver más</a>
+      </div>
+      <div class="product-card">
+        <img src="https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/ca4836da-ffe0-48bd-90c2-cd3f4ca40407/NIKE+DUNK+LOW+RETRO+SE.png" alt="Modelo 4" />
+        <h3>Nike Dunk Low Retro</h3>
+        <p>$1,999 MXN</p>
+        <a href="tenis4.html" class="ver-mas-btn">Ver más</a>
+      </div>
+    </section>
+    
+  </main>
+
+  <script src="translate.js"></script>
+  <script src="search.js"></script>
+  <script>
+    // Mostrar número de carrito guardado
+    const cartCount = document.getElementById('cart-count');
+    const savedCart = localStorage.getItem('carrito') || 0;
+    cartCount.textContent = savedCart;
+  </script>
+  
+</body>
+</html>

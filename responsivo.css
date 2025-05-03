@@ -1,0 +1,119 @@
+/* ===== RESPONSIVE: PRODUCTO DETALLE ===== */
+
+@media (max-width: 1024px) {
+    .header-container {
+      padding: 18px 30px;
+    }
+  
+    .producto-container {
+      padding: 20px;
+      margin: 30px 20px;
+    }
+  
+    .producto-info h1 {
+      font-size: 22px;
+    }
+  
+    .precio {
+      font-size: 18px;
+    }
+  
+    .boton-compra {
+      font-size: 15px;
+      padding: 12px 0;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .header-container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  
+    .main-nav {
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+  
+    .icons {
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+  
+    .search-container input {
+      width: 100px;
+    }
+  
+    .producto-container {
+      margin: 30px 10px;
+      padding: 15px;
+    }
+  
+    .producto-info h1 {
+      font-size: 20px;
+    }
+  
+    .precio {
+      font-size: 16px;
+    }
+  
+    .tallas {
+      gap: 8px;
+    }
+  
+    .talla {
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+  
+    .boton-compra {
+      font-size: 14px;
+      padding: 12px 0;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo {
+      font-size: 22px;
+    }
+  
+    .main-nav a {
+      font-size: 12px;
+    }
+  
+    .producto-container {
+      padding: 10px;
+    }
+  
+    .producto-info h1 {
+      font-size: 18px;
+    }
+  
+    .precio {
+      font-size: 15px;
+    }
+  
+    .talla {
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+  
+    .boton-compra {
+      font-size: 13px;
+      padding: 10px 0;
+    }
+  
+    .btn-regresar {
+      width: 36px;
+      height: 36px;
+      font-size: 20px;
+    }
+  
+    #cart-count {
+      font-size: 10px;
+      top: -6px;
+      right: -6px;
+    }
+  }
+  
