@@ -83,6 +83,21 @@
     const savedCart = localStorage.getItem('carrito') || 0;
     cartCount.textContent = savedCart;
   </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const userIcon = document.querySelector('.user-icon');
+      const dropdown = document.querySelector('.dropdown-content');
+  
+      userIcon.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+      });
+  
+      document.addEventListener('click', function () {
+        dropdown.style.display = 'none';
+      });
+    });
+  </script>
   
 </body>
 </html>

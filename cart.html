@@ -87,6 +87,48 @@
   color: white;
 }
 
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 2000; /* Aumentamos la prioridad */
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  min-width: 150px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 2000; /* Muy importante */
+}
+
+.dropdown-content p {
+  margin: 0;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 5px 0;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown-content a:hover {
+  background-color: #f3f3f3;
+  border-radius: 4px;
+}
+
+.user-dropdown:hover .dropdown-content {
+  display: block;
+}
+
   </style>
 </head>
 <body>
@@ -188,6 +230,21 @@
         if (remainingItems.length === 0) {
           cartSummary.textContent = "Tu carrito está vacío";
         }
+      });
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const userIcon = document.querySelector('.user-icon');
+      const dropdown = document.querySelector('.dropdown-content');
+  
+      userIcon.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+      });
+  
+      document.addEventListener('click', function () {
+        dropdown.style.display = 'none';
       });
     });
   </script>
